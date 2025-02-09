@@ -1,0 +1,67 @@
+# Dependencias
+/node_modules
+/node_modules/*
+/.npm
+/.yarn
+/.pnp
+.pnp.js
+
+# Entornos
+/dist
+/tmp
+/out-tsc
+/.angular
+.cache/
+
+# Archivos de entorno (personaliza según necesidades)
+# environments/environment.ts
+# environments/environment.prod.ts
+
+# Configuración de IDE (VS Code)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Archivos de depuración
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.tsbuildinfo
+
+# Cobertura de pruebas
+/coverage
+chrome-debug.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos de prueba específicos
+/test/out
+/test/*.js
+/test/*.map
+
+# Configuraciones locales
+.eslintrc.json
+tsconfig.*.json
+*.local.*
+.env
+.env.local
+.env.*.local
+
+# Archivos de depuración de VS Code
+*.vsix
+*.code-workspace
+
+# Archivos temporales de build
+*.msi
+*.msix
+*.tmp
+*.bak
+
+# Historial local de VS Code
+.local-history/
