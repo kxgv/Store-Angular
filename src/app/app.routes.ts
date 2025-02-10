@@ -1,6 +1,6 @@
-import { MainComponent } from './modules/home/components/main/main.component';
 import { Routes } from '@angular/router';
+import { HomeLayoutComponent } from './features/home/home-layout/home-layout.component';
 
 export const routes: Routes = [
-    { path: '', component: MainComponent },
+    { path: '', component: HomeLayoutComponent },
   ];
