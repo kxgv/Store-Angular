@@ -21,6 +21,11 @@
           <p class="text-lg font-bold text-orange-600">$30.00</p>
         </div>
       </div>    
+
+      <div>test</div>
+      <div class="product-item" *ngFor="let product of featuredProducts$ | async">
+        <p>{{product.Name}}</p>
+      </div>
   
       <!-- Agrega más productos aquí -->
     </div>
