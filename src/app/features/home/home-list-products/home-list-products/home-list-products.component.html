@@ -1,32 +1,15 @@
 <section class="p-8">
-    <h2 class="text-2xl font-bold mb-6">Nuestros Productos</h2>
+    <h2 class="kantumruy-pro text-2xl font-bold mb-6">Nuestros Productos</h2>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Producto 1 -->
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <img src="ruta-del-producto1.jpg" alt="Producto 1" class="w-full h-64 object-cover">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden"
+        *ngFor="let product of featuredProducts$ | async">
+        <img src="https://picsum.photos/500/700" alt="Producto" class="w-full h-64 object-cover">
         <div class="p-4">
-          <h3 class="text-xl font-semibold">Producto 1</h3>
-          <p class="text-gray-500">Descripción del producto 1.</p>
-          <p class="text-lg font-bold text-orange-600">$20.00</p>
+          <h3 class="kantumruy-pro text-xl font-semibold">{{ product.Name }}</h3>
+          <p class="text-gray-500">{{ product.Description }}</p>
+          <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
         </div>
       </div>
-      
-      <!-- Producto 2 -->
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <img src="ruta-del-producto2.jpg" alt="Producto 2" class="w-full h-64 object-cover">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Producto 2</h3>
-          <p class="text-gray-500">Descripción del producto 2.</p>
-          <p class="text-lg font-bold text-orange-600">$30.00</p>
-        </div>
-      </div>    
-
-      <div>test</div>
-      <div class="product-item" *ngFor="let product of featuredProducts$ | async">
-        <p>{{product.Name}}</p>
-      </div>
-  
-      <!-- Agrega más productos aquí -->
     </div>
   </section>

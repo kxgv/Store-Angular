@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@00&display=swap');
 @import "tailwindcss";
+  
+.kantumruy-pro {
+    font-family: "Kantumruy Pro", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
