@@ -14,7 +14,7 @@ export class ProductService {
   
   constructor() {}
   
-  private apiUrl = 'https://localhost:7040/Products';  // URL backend
+  private apiUrl = 'http://localhost:7040/Products';  // URL backend
   private http = inject(HttpClient);
 
   // Obtener productos destacados

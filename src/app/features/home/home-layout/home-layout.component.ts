@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NavBarComponent } from '../../../shared/components/nav-bar/nav-bar.component';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { HeroComponent } from '../../../shared/components/hero/hero.component';
-import { HomeListProductsComponent } from '../home-list-products/home-list-products/home-list-products.component';
+import { ProductsHomeListComponent } from '../../products/products-home-list/products-home-list/products-home-list.component';
 
 @Component({
   selector: 'app-home-layout',
-  imports: [NavBarComponent, HomeListProductsComponent, FooterComponent, HeroComponent],
+  imports: [NavBarComponent, ProductsHomeListComponent, FooterComponent, HeroComponent],
   templateUrl: './home-layout.component.html',
   styleUrl: './home-layout.component.css' 
 })

@@ -10,6 +10,10 @@
           <p class="text-gray-500">{{ product.Description }}</p>
           <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
         </div>
+        <div>
+            <a [routerLink]="['/product-detail', product.Id]">EEEE</a>
+            <button  routerLinkActive="router-link-active" >Ver detalles</button>
+        </div>
       </div>
     </div>
   </section>
