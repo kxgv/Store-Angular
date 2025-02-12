@@ -4,16 +4,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div class="bg-white shadow-lg rounded-lg overflow-hidden"
         *ngFor="let product of featuredProducts$ | async">
-        <img src="https://picsum.photos/500/700" alt="Producto" class="w-full h-64 object-cover">
+        <img src="{{product.ImageURL}}" alt="Producto" class="w-full h-64 object-cover">
         <div class="p-4">
           <h3 class="kantumruy-pro text-xl font-semibold">{{ product.Name }}</h3>
           <p class="text-gray-500">{{ product.Description }}</p>
           <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
         </div>
         <div>
-            <a [routerLink]="['/product-detail', product.Id]">EEEE</a>
-            <button  routerLinkActive="router-link-active" >Ver detalles</button>
+          <a [routerLink]="['/product-detail', product.Id]" ><button class="btn">Ver más</button></a>
         </div>
       </div>
     </div>
-  </section>
+  </section>  

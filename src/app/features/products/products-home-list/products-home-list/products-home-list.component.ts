@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
-import { ProductDto } from '../../../../api/api.service';
+import { ProductHomeDto } from '../../../../api/api.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 export class ProductsHomeListComponent implements OnInit{
 
-    featuredProducts$: Observable<ProductDto[]> = of([]);
+    featuredProducts$: Observable<ProductHomeDto[]> = of([]);
 
     private readonly route = inject(ActivatedRoute);
     productService = inject(ProductService); 

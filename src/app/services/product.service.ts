@@ -1,9 +1,10 @@
+import { ProductDetailDto } from './../api/api.service';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import {
-  ProductDto,
+  ProductHomeDto,
 } from '../api/api.service';
 
 @Injectable({
@@ -18,13 +19,13 @@ export class ProductService {
   private http = inject(HttpClient);
 
   // Obtener productos destacados
-  getFeaturedProducts(): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiUrl}/featured`);
+  getFeaturedProducts(): Observable<ProductHomeDto[]> {
+    return this.http.get<ProductHomeDto[]>(`${this.apiUrl}/featured`);
   }
 
   // Obtener un producto por su ID
-  getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getDetailedProduct(productId: number): Observable<ProductDetailDto> {
+    return this.http.get<ProductDetailDto>(`${this.apiUrl + "/product-detail"}/${productId}`);
   } 
 
 }

@@ -1,1 +1,14 @@
-<h1>PRODUCT DETAILS</h1>
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="product$ | async as product" class="flex justify-center my-10">
+    <div class="mr-5">
+        <a [routerLink]="['/']" ><button class="btn">Atrás</button></a>
+    </div>
+  <img class="w-150" src="{{ product.ImageURL }}" />
+  <div class="ml-5">
+    <h1>{{ product.Name }}</h1>
+    <p>{{ product.Description }}</p>
+    <p>{{ product.Price }}</p>
+    <p>{{ product.Color }}</p>
+  </div>
+</div>

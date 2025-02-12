@@ -13,7 +13,16 @@ export interface AddressDetailDto {
     SiteIdNumber: string | null;
 }
 
-export interface ProductDto {
+export interface ProductHomeDto {
+    Id: number;
+    Name: string | null;
+    Price: number | null;
+    Description: string | null;
+    ImageURL: string | null;
+    IsFeatured: string | null; 
+}
+
+export interface ProductDetailDto {
     Id: number;
     Guid: string | null;
     Name: string | null;
@@ -21,5 +30,6 @@ export interface ProductDto {
     Price: number | null;
     Size: string | null;
     Description: string | null;
+    ImageURL: string | null;
     IsFeatured: string | null;
 }
