@@ -1,0 +1,50 @@
+<!-- <div class="bg-indigo-500 hover:bg-fuchsia-500">
+    <div class="flex justify-center items-center">
+        <input>
+        <p>text</p>
+    </div>
+</div> -->
+
+<div
+  class="login-container max-w-md mx-auto my-60 p-4 bg-white shadow-md rounded-lg"
+>
+  <h2 class="text-center text-2xl font-bold mb-4">Iniciar sesión</h2>
+  <form>
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700"
+        >Correo electrónico</label
+      >
+      <input
+        type="email"
+        id="email"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+        name="email"
+        required
+      />
+      <div class="text-red-500 text-sm">
+        El correo electrónico es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="password" class="block text-sm font-medium text-gray-700"
+        >Contraseña</label
+      >
+      <input
+        type="password"
+        id="password"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+        name="password"
+        required
+      />
+      <div class="text-red-500 text-sm">La contraseña es obligatoria.</div>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 focus:outline-none"
+    >
+      Iniciar sesión
+    </button>
+  </form>
+</div>

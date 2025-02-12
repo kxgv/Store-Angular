@@ -8,3 +8,7 @@
     font-weight: 300;
     font-style: normal;
 }
+
+body.login-background {
+    background-color: #f8fafc; /* o cualquier color que desees */
+}
