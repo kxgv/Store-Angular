@@ -2,6 +2,7 @@ import { ProductDetailDto } from './../api/api.service';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 import {
   ProductHomeDto,
@@ -14,18 +15,19 @@ import {
 export class ProductService {
   
   constructor() {}
-  
-  private apiUrl = 'http://localhost:7040/Products';  // URL backend
+
   private http = inject(HttpClient);
+  private URLbase = environment.apiURL;  // URL backend
+
 
   // Obtener productos destacados
   getFeaturedProducts(): Observable<ProductHomeDto[]> {
-    return this.http.get<ProductHomeDto[]>(`${this.apiUrl}/featured`);
+    return this.http.get<ProductHomeDto[]>(`${this.URLbase}/Products/featured`);
   }
 
   // Obtener un producto por su ID
   getDetailedProduct(productId: number): Observable<ProductDetailDto> {
-    return this.http.get<ProductDetailDto>(`${this.apiUrl + "/product-detail"}/${productId}`);
+    return this.http.get<ProductDetailDto>(`${this.URLbase + "/Products/product-detail"}/${productId}`);
   } 
 
 }

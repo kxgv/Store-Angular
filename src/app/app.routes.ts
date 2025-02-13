@@ -3,6 +3,7 @@ import { HomeLayoutComponent } from './features/home/home-layout/home-layout.com
 import { PRODUCTS_ROUTES } from './features/products/products.route';
 import { ProductDetailComponent } from './features/products/product-detail/product-detail.component';
 import { LoginComponent } from './features/login/login/login.component';
+import { DashboardLayoutComponent } from './features/dashboard/dashboard-layout/dashboard-layout.component';
 
 export const routes: Routes = [
   {
@@ -21,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardLayoutComponent,
   }
 ];

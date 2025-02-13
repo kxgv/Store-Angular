@@ -1,15 +1,6 @@
-<!-- <div class="bg-indigo-500 hover:bg-fuchsia-500">
-    <div class="flex justify-center items-center">
-        <input>
-        <p>text</p>
-    </div>
-</div> -->
-
-<div
-  class="login-container max-w-md mx-auto my-60 p-4 bg-white shadow-md rounded-lg"
->
-  <h2 class="text-center text-2xl font-bold mb-4">Iniciar sesión</h2>
-  <form>
+<div class="login-container max-w-md mx-auto my-60 p-4 bg-white shadow-xl rounded-lg">
+  <h2 class="text-center text-2xl font-bold mb-4">Administrador</h2>
+  <form [formGroup]="loginForm" (submit)="login()">
     <div class="mb-4">
       <label for="email" class="block text-sm font-medium text-gray-700"
         >Correo electrónico</label
@@ -19,10 +10,14 @@
         id="email"
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
         name="email"
+        formControlName="email"
         required
       />
-      <div class="text-red-500 text-sm">
-        El correo electrónico es obligatorio.
+      <div
+        class="text-red-500 text-sm"
+        *ngIf="(fc.email.errors ?? {})['pattern']"
+      >
+        {{ emailFormatNotValid }}
       </div>
     </div>
 
@@ -35,16 +30,37 @@
         id="password"
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
         name="password"
+        formControlName="password"
         required
       />
-      <div class="text-red-500 text-sm">La contraseña es obligatoria.</div>
     </div>
-
-    <button
-      type="submit"
-      class="w-full py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 focus:outline-none"
-    >
-      Iniciar sesión
-    </button>
+    <div class="flex justify-center items-center">
+      <button
+        type="button"
+        class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        type="submit"
+        [disabled]="submitted || loginForm.invalid"
+        (click)="login()"
+      >
+        <span *ngIf="!submitted"> CONTINUAR </span>
+        <span *ngIf="submitted"> CARGANDO... </span>
+        <span *ngIf="submitted" class="flex justify-center items-center my-1">
+          <svg
+            class="w-5 h-5 ml-2 animate-spin"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path fill="currentColor" d="M4 12a8 8 0 018-8"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
   </form>
 </div>

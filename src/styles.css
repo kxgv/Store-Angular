@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@00&display=swap');
 @import "tailwindcss";
-  
+
 .kantumruy-pro {
     font-family: "Kantumruy Pro", serif;
     font-optical-sizing: auto;
@@ -9,6 +9,58 @@
     font-style: normal;
 }
 
-body.login-background {
-    background-color: #f8fafc; /* o cualquier color que desees */
-}
+html.login-page {
+    background-color: #0f172a !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+  
+  html.login-page::before {
+    content: '';
+    position:  fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      rgba(15, 23, 42, 0.8) 100%);
+    z-index: -1;
+    animation: background-pulse 8s infinite;
+  }
+  
+  @keyframes background-pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+  }
+  
+  html.login-page:hover::before {
+    background: radial-gradient(circle at 50% 50%, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(15, 23, 42, 0.9) 100%);
+    animation-duration: 4s;
+  }
+  
+  /* Efectos adicionales para elementos interactivos */
+  .login-page .btn-primary {
+    background-color: #334155;
+    border: 1px solid #475569;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .login-page .btn-primary:hover {
+    background-color: #475569;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-page .form-control:hover {
+    border-color: #64748b;
+  }
+  
+  .login-page .form-control:focus {
+    border-color: #94a3b8;
+    box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.3);
+  }
