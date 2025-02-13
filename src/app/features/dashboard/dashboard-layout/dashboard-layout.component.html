@@ -1,1 +1,29 @@
-<p>dashboard-layout works!</p>
+<section>
+    <div class="grid grid-cols-4 gap-4 mt-10">
+        <div class="grid-cols-1 bg-red-200">
+            <p class="ml-3">Bienvenido, admin-name</p>
+            <p class="ml-3">Rol: </p>
+        </div>
+        <div>02</div>
+        <div>03</div>
+        <div>04</div>
+        <div class="bg-purple-400">
+            <nav class="h-100 flex flex-col justify-center">
+                <ul class="flex flex-col h-full justify-evenly">
+                    <li class="text-lg flex items-center justify-center">Inicio</li>
+                    <li class="text-lg flex items-center justify-center">Productos</li>
+                    <li class="text-lg flex items-center justify-center">Categorías</li>
+                    <li class="text-lg flex items-center justify-center">Pedidos</li>
+                    <li class="text-lg flex items-center justify-center">Usuarios</li>
+                    <li class="text-lg flex items-center justify-center">Proveedores</li>
+                    <li class="text-lg flex items-center justify-center">Redes Sociales</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-span-3 grid grid-cols-subgrid gap-4 bg-yellow-200">
+          <div class="w-300">
+            <app-products-home-list></app-products-home-list>
+          </div>
+        </div>
+    </div>
+</section>

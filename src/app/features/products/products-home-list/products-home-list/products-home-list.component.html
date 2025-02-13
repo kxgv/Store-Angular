@@ -1,18 +1,25 @@
 <section class="p-8">
-    <h2 class="kantumruy-pro text-2xl font-bold mb-6">Nuestros Productos</h2>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden"
-        *ngFor="let product of featuredProducts$ | async">
-        <img src="{{product.ImageURL}}" alt="Producto" class="w-full h-64 object-cover">
-        <div class="p-4">
-          <h3 class="kantumruy-pro text-xl font-semibold">{{ product.Name }}</h3>
-          <p class="text-gray-500">{{ product.Description }}</p>
-          <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
-        </div>
-        <div>
-          <a [routerLink]="['/product-detail', product.Id]" ><button class="btn">Ver más</button></a>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden" *ngFor="let product of featuredProducts$ | async">
+      <img src="{{ product.ImageURL }}" alt="Producto" class="w-full h-64 object-cover" />
+      <div class="p-4">
+        <h3 class="kantumruy-pro text-xl font-semibold">{{ product.Name }}</h3>
+        <p class="text-gray-500">{{ product.Description }}</p>
+        <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
+      </div>
+      <div class="flex justify-between p-4"> <!-- Añade flex y justify-between para separar los botones -->
+        <a [routerLink]="['/product-detail', product.Id]">
+          <button class="btn">Ver más</button>
+        </a>
+        <div class="flex gap-2"> <!-- Añade flex y gap-2 para separar los botones de Feedback y Delete -->
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 hadow-lg text-sm">
+            Feedback
+          </button>
+          <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm">
+            Delete
+          </button>
         </div>
       </div>
     </div>
-  </section>  
+  </div>
+</section>
