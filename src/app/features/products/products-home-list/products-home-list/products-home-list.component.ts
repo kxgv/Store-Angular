@@ -1,10 +1,14 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthService } from './../../../../services/auth.service';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { ProductHomeDto } from '../../../../api/api.service';
-import { Observable, of, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { AppState, selectAll} from '../../store/products.selectors';
+import * as Actions from '../../../products/store/products.actions';
 
 @Component({
   selector: 'app-products-home-list',
@@ -13,29 +17,40 @@ import { CommonModule } from '@angular/common';
   styleUrl: './products-home-list.component.css'
 })
 
-export class ProductsHomeListComponent implements OnInit{
+export class ProductsHomeListComponent implements OnInit {
 
-    featuredProducts$: Observable<ProductHomeDto[]> = of([]);
+  @Input() isFeatured: boolean = false;
 
-    private readonly route = inject(ActivatedRoute);
-    productService = inject(ProductService); 
-    products: any[] = [];
-    selectedId: number | null = 0;
+  featuredProducts$: Observable<ProductHomeDto[]> = of([]);
 
-    constructor(private router: Router) {}  
-  
-    ngOnInit(): void {
-      //this.featuredProducts$ = this.productService.getFeaturedProducts();
+  private readonly route = inject(ActivatedRoute);
+  productService = inject(ProductService);
+  authService = inject(AuthService);
 
-      this.featuredProducts$ = this.route.paramMap.pipe(
-        switchMap(params => {
-          this.selectedId = Number(params.get('Id'));
-          return this.productService.getFeaturedProducts();
-        })
-      );
-    }
+  products: any[] = [];
+  selectedId: number | null = 0;
+  filteredProducts$: Observable<ProductHomeDto[]> | undefined; 
+  role: string | null = "";
 
-    openProductDetail(productId: number): void {
-      this.router.navigate(['/product-detail', productId], {relativeTo: this.route})
-    }
+  constructor(
+    private router: Router,
+    private store: Store<AppState>) {
+  }
+
+  ngOnInit(): void {
+    //this.featuredProducts$ = this.productService.getFeaturedProducts();
+
+    this.featuredProducts$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.selectedId = Number(params.get('Id'));
+        return this.productService.getFeaturedProducts();
+      })
+    ); 
+    
+    console.log('ey im this role', this.role);
+  }
+
+  openProductDetail(productId: number): void {
+    this.router.navigate(['/product-detail', productId], { relativeTo: this.route })
+  }
 }

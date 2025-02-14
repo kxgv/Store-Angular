@@ -33,3 +33,21 @@ export interface ProductDetailDto {
     ImageURL: string | null;
     IsFeatured: string | null;
 }
+
+export interface ProductDto {
+    Id: number;
+    Guid: string | null;
+    Name: string | null;
+    Color: string | null;
+    Price: number | null;
+    Size: string | null;
+    Description: string | null;
+    ImageURL: string | null;
+    IsFeatured: string | null;
+}
+
+
+export interface TokenPayload {
+    email: string;
+    role: string; 
+}

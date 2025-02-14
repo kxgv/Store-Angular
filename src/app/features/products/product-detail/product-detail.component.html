@@ -1,14 +1,37 @@
 <app-nav-bar></app-nav-bar>
 
 <div *ngIf="product$ | async as product" class="flex justify-center my-10">
-    <div class="mr-5">
-        <a [routerLink]="['/']" ><button class="btn">Atrás</button></a>
-    </div>
-  <img class="w-150" src="{{ product.ImageURL }}" />
+  <div class="mr-5">
+    <a [routerLink]="['/']">
+      <button
+        class="bg-amber-100 hover:bg-amber-200 text-black font-bold py-1 px-3 shadow-lg text-sm w-15"
+      >
+        Atrás
+        <div class="ml-1.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.53 2.47a.75.75 0 0 1 0 1.06L4.81 8.25H15a6.75 6.75 0 0 1 0 13.5h-3a.75.75 0 0 1 0-1.5h3a5.25 5.25 0 1 0 0-10.5H4.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+    </a>
+  </div>
+  <img
+    class="w-100 h-150 object-cover shadow-lg rounded-lg overflow-hidden"
+    src="{{ product.ImageURL }}"
+  />
   <div class="ml-5">
-    <h1>{{ product.Name }}</h1>
+    <h1 class="text-lg font-bold">{{ product.Name }}</h1>
     <p>{{ product.Description }}</p>
-    <p>{{ product.Price }}</p>
-    <p>{{ product.Color }}</p>
+    <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
+    <p class="font-bold text-gray-600">{{ product.Color }}</p>
   </div>
 </div>

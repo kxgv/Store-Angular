@@ -7,13 +7,15 @@
         <p class="text-gray-500">{{ product.Description }}</p>
         <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
       </div>
-      <div class="flex justify-between p-4"> <!-- Añade flex y justify-between para separar los botones -->
+      <div class="flex justify-between p-4">
         <a [routerLink]="['/product-detail', product.Id]">
-          <button class="btn">Ver más</button>
+          <button class="bg-amber-100 hover:bg-amber-200 text-black font-bold py-1 px-3 shadow-lg text-sm">
+            Ver más
+          </button>
         </a>
-        <div class="flex gap-2"> <!-- Añade flex y gap-2 para separar los botones de Feedback y Delete -->
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 hadow-lg text-sm">
-            Feedback
+        <div class="flex gap-2"> <!-- *ngIf="role === 'Admin'" -->
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm">
+            Edit
           </button>
           <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm">
             Delete

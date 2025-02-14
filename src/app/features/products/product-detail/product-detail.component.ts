@@ -5,6 +5,8 @@ import { ProductDetailDto } from '../../../api/api.service';
 import { ProductService } from '../../../services/product.service';
 import { NavBarComponent } from "../../../shared/components/nav-bar/nav-bar.component";
 import { CommonModule, Location } from '@angular/common';
+import { ConfirmModalComponent } from '../../../shared/components/confirm-modal/confirm-modal.component';
+//import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-detail',
@@ -32,5 +34,18 @@ export class ProductDetailComponent implements OnInit {
     }
 
     this.product$ = this.productService.getDetailedProduct(productId);
+  }
+
+  openDeleteModal(productId: number) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productService.deleteProduct(productId).subscribe(() => {
+          // Actualizar la lista de productos o hacer cualquier otra acción necesaria
+          this.loadProducts();
+        });
+      }
+    });
   }
 }
