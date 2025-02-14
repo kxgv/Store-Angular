@@ -64,3 +64,5 @@ html.login-page {
     border-color: #94a3b8;
     box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.3);
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

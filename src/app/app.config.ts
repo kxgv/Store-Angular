@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(ProductsEffects),
     provideStore(),
     provideState('products', productsReducer),
-    provideStoreDevtools()
+    provideStoreDevtools(), provideAnimationsAsync()
 
   ]
 };

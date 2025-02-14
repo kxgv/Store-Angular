@@ -46,6 +46,15 @@ export interface ProductDto {
     IsFeatured: string | null;
 }
 
+export interface CreateProductDto {
+    Name: string | null;
+    Color: string | null;
+    Price: number | null;
+    Size: string | null;
+    Description: string | null;
+    ImageURL: string | null;
+    IsFeatured: boolean;
+}
 
 export interface TokenPayload {
     email: string;

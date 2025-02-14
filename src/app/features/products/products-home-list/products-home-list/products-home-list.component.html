@@ -1,7 +1,16 @@
 <section class="p-8">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden" *ngFor="let product of featuredProducts$ | async">
-      <img src="{{ product.ImageURL }}" alt="Producto" class="w-full h-64 object-cover" />
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    <div
+      class="bg-white shadow-lg rounded-lg overflow-hidden"
+      *ngFor="let product of featuredProducts$ | async"
+    >
+      <img
+        src="{{ product.ImageURL }}"
+        alt="Producto"
+        class="w-full h-64 object-cover"
+      />
       <div class="p-4">
         <h3 class="kantumruy-pro text-xl font-semibold">{{ product.Name }}</h3>
         <p class="text-gray-500">{{ product.Description }}</p>
@@ -9,19 +18,33 @@
       </div>
       <div class="flex justify-between p-4">
         <a [routerLink]="['/product-detail', product.Id]">
-          <button class="bg-amber-100 hover:bg-amber-200 text-black font-bold py-1 px-3 shadow-lg text-sm">
+          <button
+            class="bg-amber-100 hover:bg-amber-200 text-black font-bold py-1 px-3 shadow-lg text-sm"
+          >
             Ver más
           </button>
         </a>
-        <div class="flex gap-2"> <!-- *ngIf="role === 'Admin'" -->
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm">
-            Edit
+        <div class="flex gap-2">
+          <!-- *ngIf="role === 'Admin'" -->
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
+          >
+            Editar
           </button>
-          <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm">
-            Delete
+          <button
+            (click)="openModal(product.Id)"
+            class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
+          >
+            Eliminar
           </button>
         </div>
       </div>
     </div>
   </div>
+  <app-confirm-modal
+    *ngIf="isModalOpen"
+    (confirm)="onConfirmDelete()"
+    (cancel)="onCancelDelete()"
+  >
+  </app-confirm-modal>  
 </section>

@@ -9,6 +9,7 @@ import { ProductsEffects } from './features/products/store/products.effects';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { provideState, StoreModule } from '@ngrx/store';
 import { ProductState } from './features/products/store/products.state';
+import { CreateProductComponent } from './features/products/create-product/create-product.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'product-detail/:Id',
     component: ProductDetailComponent
+  }, 
+  {
+    path: 'create-product',
+    component: CreateProductComponent
   }, 
   {
     path: 'login',
