@@ -1,6 +1,34 @@
 # StoreAngular
 
+Por falta de tiempo, no de compromiso:  
+- los tests no han sido realizados. 
+- el flujo de edición no ha sido realizada.
+
+Disculpas de antemano. 
+
+❌ Hubo problemas técnicos con NGRX y los componentes standalone.
+👌  He trbajado con NGRX en Modulos, cosas del directo.
+
+✔️ Se creó un login, 
+⚠️ pero falta desencriptar el token y usar el role="Admin" en su AdminDashboard. 
+
+Usaré esta plantilla para futuros proyectos.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+node -v: 22.13.1
+npm -v: 10.9.2
+
+## Preview Images
+
+![Home](https://i.postimg.cc/4xd5zKLH/home-1.png)
+
+![Home Responsive](https://i.postimg.cc/R0mwgNGT/home-2.png)
+
+![Login](https://i.postimg.cc/RCpQvCVM/login.png)
+
+![Create Product ](https://i.postimg.cc/15g0XxfD/create-product.png)
+
+![Product Detail](https://i.postimg.cc/L6rtZy1w/product-detail.png)
 
 ## Development server
 
@@ -9,6 +37,13 @@ To start a local development server, run:
 ```bash
 ng serve
 ```
+
+Or use:
+```bash
+npm start
+```
+
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
