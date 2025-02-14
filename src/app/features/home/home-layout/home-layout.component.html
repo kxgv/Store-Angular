@@ -2,6 +2,14 @@
 
 <main>
   <app-hero></app-hero>
+  <div class="mx-3 p-3">
+    <a [routerLink]="['/create-product']">
+      <button class="bg-blue-500 text-white py-2 px-4 mx-5 rounded hover:bg-blue-600 ml-4 ">
+        Crear Producto
+      </button>
+    </a>
+  </div>
+
   <app-products-home-list [isFeatured]="true"></app-products-home-list>>
 </main>
 

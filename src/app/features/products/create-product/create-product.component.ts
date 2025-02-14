@@ -61,7 +61,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
             price: new FormControl<number | null>(0, Validators.required),
             size: new FormControl<string | null>(null, Validators.required),
             description: new FormControl<string | null>(null, Validators.required),
-            isFeatured: new FormControl<boolean>(false),
+            isFeatured: new FormControl<boolean>(false, {
+              validators: Validators.required,
+              nonNullable: true
+            }),
             imageURL:new FormControl<string | null>(null),
       });
     }
@@ -85,6 +88,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   
       this.productService.createProduct(productData).subscribe({
         next: (response) => {
+          this.router.navigate(['/']);
           console.log('Producto creado exitosamente', response);
         },
         error: (err) => {
