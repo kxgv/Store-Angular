@@ -6,7 +6,7 @@ Por falta de tiempo, no de compromiso:
 Disculpas de antemano. 
 
 ❌ Hubo problemas técnicos con NGRX y los componentes standalone.
-👌  He trbajado con NGRX en Modulos, cosas del directo.
+👌  He trabajado con NGRX en Modulos, cosas del directo.
 
 ✔️ Se creó un login, 
 ⚠️ pero falta desencriptar el token y usar el role="Admin" en su AdminDashboard. 
