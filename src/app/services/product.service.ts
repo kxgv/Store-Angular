@@ -15,7 +15,7 @@ import {
 })
 
 export class ProductService {
-  
+
   constructor() {}
 
   private http = inject(HttpClient);
@@ -36,7 +36,11 @@ export class ProductService {
   getDetailedProduct(productId: number): Observable<ProductDetailDto> {
     return this.http.get<ProductDetailDto>(`${this.URLbase + "/Products/product-detail"}/${productId}`);
   }
-  
+
+  getProductById(productId: number): Observable<ProductDetailDto> {
+    return this.http.get<ProductDetailDto>(`${this.URLbase + "/Products/product-edit"}/${productId}`);
+  }
+
   getAllProducts(): Observable<ProductHomeDto[]> {
     console.log("getAllProducts");
     return this.http.get<Array<ProductHomeDto>>(`${this.URLbase}/Products/all`);
@@ -48,6 +52,11 @@ export class ProductService {
 
   createProduct(product: CreateProductDto): Observable<CreateProductDto> {
     return this.http.post<CreateProductDto>(`${this.URLbase}/Products`, product);
+  }
+
+  updateProduct(productId: number, product: CreateProductDto): Observable<CreateProductDto> {
+    const url = this.URLbase + "/Products/update/" + productId;
+    return this.http.put<CreateProductDto>(url, product);
   }
 
 }

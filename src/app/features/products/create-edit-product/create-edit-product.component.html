@@ -1,6 +1,8 @@
 <div class="login-container max-w-md mx-auto my-30 p-4 bg-white shadow-xl rounded-lg">
-    <h2 class="text-center text-2xl font-bold mb-4">Nuevo Producto</h2>
-    <form [formGroup]="createProductForm">
+  <h2 class="text-center text-2xl font-bold mb-4">
+    {{ isEditing ? 'Editar Producto' : 'Nuevo Producto' }}
+  </h2>
+  <form [formGroup]="createProductForm">
       <!-- Name Field -->
       <div class="mb-4">
         <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
@@ -15,7 +17,7 @@
           Nombre es obligatorio.
         </div>
       </div>
-  
+
       <!-- Color Field -->
       <div class="mb-4">
         <label for="color" class="block text-sm font-medium text-gray-700">Color</label>
@@ -27,7 +29,7 @@
           required
         />
       </div>
-  
+
       <!-- Price Field -->
       <div class="mb-4">
         <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
@@ -39,7 +41,7 @@
           required
         />
       </div>
-  
+
       <!-- Size Field -->
       <div class="mb-4">
         <label for="size" class="block text-sm font-medium text-gray-700">Tamaño</label>
@@ -51,7 +53,7 @@
           required
         />
       </div>
-  
+
       <!-- Description Field -->
       <div class="mb-4">
         <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
@@ -62,13 +64,13 @@
           required
         ></textarea>
       </div>
-  
+
       <!-- Is Featured Field -->
       <div class="mb-4 flex items-center">
         <input type="checkbox" id="isFeatured" formControlName="isFeatured" class="mr-2" />
         <label for="isFeatured" class="text-sm font-medium text-gray-700">Destacado</label>
       </div>
-  
+
       <!-- Image URL Field -->
       <div class="mb-6">
         <label for="imageURL" class="block text-sm font-medium text-gray-700">URL de la Imagen</label>
@@ -79,7 +81,7 @@
           formControlName="imageURL"
         />
       </div>
-  
+
       <!-- Submit Button -->
       <div class="flex justify-center items-center">
         <button
@@ -88,7 +90,9 @@
           [disabled]="submitted || createProductForm.invalid"
           (click)="onSubmit()"
         >
-          <span *ngIf="!submitted">CREAR PRODUCTO</span>
+          <span *ngIf="!submitted">
+            {{ isEditing ? 'EDITAR PRODUCTO' : 'CREAR PRODUCTO' }}
+          </span>
           <span *ngIf="submitted">CARGANDO...</span>
           <span *ngIf="submitted" class="flex justify-center items-center my-1">
             <svg class="w-5 h-5 ml-2 animate-spin" viewBox="0 0 24 24" fill="none">
@@ -123,4 +127,3 @@
       </div>
     </form>
   </div>
-  

@@ -9,21 +9,25 @@ import { ProductsEffects } from './features/products/store/products.effects';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { provideState, StoreModule } from '@ngrx/store';
 import { ProductState } from './features/products/store/products.state';
-import { CreateProductComponent } from './features/products/create-product/create-product.component';
+import { CreateEditProductComponent } from './features/products/create-edit-product/create-edit-product.component';
 
 export const routes: Routes = [
   {
-    path: '', 
+    path: '',
     component: HomeLayoutComponent,
   },
   {
     path: 'product-detail/:Id',
     component: ProductDetailComponent
-  }, 
+  },
   {
     path: 'create-product',
-    component: CreateProductComponent
-  }, 
+    component: CreateEditProductComponent
+  },
+  {
+    path: 'product-edit/:Id',
+    component: CreateEditProductComponent
+  },
   {
     path: 'login',
     component: LoginComponent,

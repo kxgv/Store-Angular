@@ -1,7 +1,7 @@
 # StoreAngular
 
 Por falta de tiempo, no de compromiso:  
-- los tests y flujo de edición no han sido realizados. 
+- los tests no han sido realizados. 
 
 Disculpas de antemano. 
 

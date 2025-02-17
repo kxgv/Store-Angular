@@ -26,11 +26,13 @@
         </a>
         <div class="flex gap-2">
           <!-- *ngIf="role === 'Admin'" -->
-          <button
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
-          >
-            Editar
-          </button>
+          <a [routerLink]="['/product-edit', product.Id]">
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
+            >
+              Editar
+            </button>
+          </a>
           <button
             (click)="openModal(product.Id)"
             class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
@@ -46,5 +48,5 @@
     (confirm)="onConfirmDelete()"
     (cancel)="onCancelDelete()"
   >
-  </app-confirm-modal>  
+  </app-confirm-modal>
 </section>

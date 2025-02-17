@@ -19,7 +19,7 @@ export interface ProductHomeDto {
     Price: number | null;
     Description: string | null;
     ImageURL: string | null;
-    IsFeatured: string | null; 
+    IsFeatured: string | null;
 }
 
 export interface ProductDetailDto {
@@ -31,7 +31,7 @@ export interface ProductDetailDto {
     Size: string | null;
     Description: string | null;
     ImageURL: string | null;
-    IsFeatured: string | null;
+    IsFeatured: string;
 }
 
 export interface ProductDto {
@@ -43,7 +43,7 @@ export interface ProductDto {
     Size: string | null;
     Description: string | null;
     ImageURL: string | null;
-    IsFeatured: string | null;
+    IsFeatured: string;
 }
 
 export interface CreateProductDto {
@@ -58,5 +58,5 @@ export interface CreateProductDto {
 
 export interface TokenPayload {
     email: string;
-    role: string; 
+    role: string;
 }

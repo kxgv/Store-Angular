@@ -1,18 +1,18 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Form, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
-import { CreateProductDto, ProductDto } from '../../../api/api.service';
+import {CreateProductDto, ProductDetailDto, ProductDto} from '../../../api/api.service';
 
 @Component({
-  selector: 'app-create-product',
+  selector: 'app-create-edit-product',
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
-  templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.css'
+  templateUrl: './create-edit-product.component.html',
+  styleUrl: './create-edit-product.component.css'
 })
-export class CreateProductComponent implements OnInit, OnDestroy {
-  
+export class CreateEditProductComponent implements OnInit, OnDestroy {
+
   createProductForm!: FormGroup<{
       name: FormControl<string | null>;
       color: FormControl<string | null>;
@@ -26,6 +26,11 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     submitted = false;
     error: string = '';
 
+    productData!: ProductDetailDto;
+    productId: number | null = null;
+    isEditing = false;
+
+
     get fc() {
       return this.createProductForm.controls;
     }
@@ -33,8 +38,9 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     productService = inject(ProductService);
 
       constructor(
-        private router: Router, 
-        private renderer: Renderer2, 
+        private route: ActivatedRoute,
+        private router: Router,
+        private renderer: Renderer2,
         @Inject(DOCUMENT) private document: Document) { }
 
     ngOnDestroy(): void {
@@ -43,7 +49,19 @@ export class CreateProductComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.renderer.addClass(this.document.documentElement, 'login-page');
+
+      const idParam = this.route.snapshot.paramMap.get('Id');
+      const productId = idParam ? Number(idParam) : null;
+      this.productId = productId;
+
+      console.log("productId from URL", productId);
+
       this.initializeForm();
+
+      if (productId) {
+        this.loadProductData(productId);
+        this.isEditing = true;
+      }
     }
 
     initializeForm() {
@@ -69,8 +87,33 @@ export class CreateProductComponent implements OnInit, OnDestroy {
       });
     }
 
+    loadProductData(productId: number) {
+      this.productService.getProductById(productId).subscribe({
+        next: (product) => {
+          console.log("getting product", product);
+          this.productData = product;
+          this.populateForm(product);
+        },
+        error: (err) => {
+          this.error = 'No se pudo cargar el producto. Por favor, inténtalo de nuevo.';
+          console.error('Error al cargar el producto', err);
+        }
+      });
+    }
+
+    populateForm(product: ProductDetailDto) {
+      this.fc.name.setValue(product.Name);
+      this.fc.color.setValue(product.Color);
+      this.fc.price.setValue(product.Price);
+      this.fc.size.setValue(product.Size);
+      this.fc.description.setValue(product.Description);
+      this.fc.isFeatured.setValue(Boolean(product.IsFeatured));
+      this.fc.imageURL.setValue(product.ImageURL);
+    }
+
     onSubmit() {
       this.submitted = true;
+      this.isEditing = false;
       if (this.createProductForm.invalid) {
         this.error = 'Por favor, completa el formulario correctamente.';
         return;
@@ -85,16 +128,31 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         ImageURL: this.fc.imageURL.value,
         IsFeatured: this.fc.isFeatured.value,
       };
-  
-      this.productService.createProduct(productData).subscribe({
-        next: (response) => {
-          this.router.navigate(['/']);
-          console.log('Producto creado exitosamente', response);
-        },
-        error: (err) => {
-          this.error = 'Error al crear el producto. Por favor, inténtalo de nuevo.';
-          console.error('Error al crear el producto', err);
-        }
-      });
+
+      if (this.productId) {
+        console.log("updating product", this.productId);
+        this.productService.updateProduct(this.productId, productData).subscribe({
+          next: () => {
+            this.router.navigate(['/']);
+            console.log('Producto actualizado exitosamente');
+          },
+          error: (err) => {
+            this.error = 'Error al actualizar el producto.';
+            console.error(err);
+          }
+        });
+      } else {
+        this.productService.createProduct(productData).subscribe({
+          next: () => {
+            this.router.navigate(['/']);
+            console.log('Producto creado exitosamente');
+          },
+          error: (err) => {
+            this.error = 'Error al crear el producto.';
+            console.error(err);
+          }
+        });
+      }
+
     }
 }
