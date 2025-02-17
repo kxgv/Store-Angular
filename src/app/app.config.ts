@@ -10,16 +10,15 @@ import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './features/products/store/products.effects';
+import { provideRouterStore } from '@ngrx/router-store';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), 
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     provideEffects(ProductsEffects),
     provideStore(),
     provideState('products', productsReducer),
-    provideStoreDevtools(), provideAnimationsAsync()
-
-  ]
+    provideStoreDevtools(), provideAnimationsAsync(), provideRouterStore()]
 };
