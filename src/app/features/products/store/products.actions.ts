@@ -1,11 +1,16 @@
-import { create } from 'domain';
-import { ProductHomeDto } from './../../../api/api.service';
 import { createAction, props } from '@ngrx/store';
+import {ProductHomeDto} from '../../../api/api.service';
 
-export const actionList = {
-  callAllProducts: "[ Products ] Call all products ",
-  callAllProductsSuccess: "[ Products ] Call all products success",
-};
+export const login = createAction(
+  '[Login Page] Login',
+  props<{ username: string; password: string }>()
+);
 
-export const callAllProducts = createAction(actionList.callAllProducts);
-export const callAllProductsSuccess = createAction(actionList.callAllProductsSuccess, props<{ data: ProductHomeDto[]}>());
+export const getAllProducts = createAction(
+  '[Products] Get all products',
+);
+
+export const getAllProductsSucces = createAction(
+  '[Products] Get all products success',
+  props<{ products: ProductHomeDto[] }>()
+);
