@@ -1,17 +1,26 @@
-import { Action, createReducer, on } from '@ngrx/store';
+
+import { createReducer, on } from '@ngrx/store';
 import * as ProductsActions from '../store/products.actions.ts';
+import { initialState } from './products.state.ts';
+import { adapter } from './products.state.ts';
+
+export const userReducer = createReducer(
+  initialState,
+  on(ProductsActions.getAllProductsSuccess, (state, { products }) => {
+    return adapter.setAll(products, state)
+  }));
 
 //import * as ScoreboardPageActions from '../actions/scoreboard-page.actions';
 
-export interface State {
-  home: number;
-  away: number;
-}
+// export interface State {
+//   home: number;
+//   away: number;
+// }
 
-export const initialState: State = {
-  home: 0,
-  away: 0,
-};
+// export const initialState: State = {
+//   home: 0,
+//   away: 0,
+// };
 
 // export const scoreboardReducer = createReducer(
 //   initialState,

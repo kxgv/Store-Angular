@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {ProductHomeDto} from '../../../api/api.service';
+import {ProductDto, ProductHomeDto} from '../../../api/api.service';
 
 export const login = createAction(
   '[Login Page] Login',
@@ -10,7 +10,7 @@ export const getAllProducts = createAction(
   '[Products] Get all products',
 );
 
-export const getAllProductsSucces = createAction(
+export const getAllProductsSuccess = createAction(
   '[Products] Get all products success',
-  props<{ products: ProductHomeDto[] }>()
+  props<{ products: ProductDto[] }>()
 );
