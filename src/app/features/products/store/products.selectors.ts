@@ -1,11 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProductState } from '../store/products.state';
-import { ProductHomeDto } from '../../../api/api.service';
+import { adapter } from '../store/products.state';
 
-export interface AppState {
-  products: ProductHomeDto[]
-}
 
-export const selectFeature = (state: AppState) => state.products;
-
-export const selectAll = createSelector(selectFeature, (state: ProductHomeDto[]) => state); 
+export const selectFeature = createFeatureSelector<ProductState>('products');
+export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors(selectFeature);
+export const selectAllProducts = createSelector(selectFeature, selectAll);

@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
-import { EMPTY, of } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
-import { ProductHomeDto } from '../../../api/api.service';
-import { create } from 'domain';
-import { actionList, callAllProductsSuccess, callAllProducts } from './products.actions';
 
 @Injectable()
 export class ProductsEffects {
@@ -19,7 +14,6 @@ export class ProductsEffects {
 //     )
 //   )
 // ));
-
 
   constructor(
     private actions$: Actions,

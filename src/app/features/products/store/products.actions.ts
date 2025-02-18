@@ -14,3 +14,13 @@ export const getAllProductsSuccess = createAction(
   '[Products] Get all products success',
   props<{ products: ProductDto[] }>()
 );
+
+export const getAllProductsFailure = createAction(
+  '[Products] Get All Products Failure',
+  props<{ error: string }>()
+);
+
+export const selectProduct = createAction(
+  '[Products] Select Product',
+  props<{ productId: string }>()
+);
