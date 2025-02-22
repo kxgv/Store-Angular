@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { ProductService } from '../../../services/product.service';
+import { ProductHomeDto } from '../../../api/api.service';
 
 @Injectable()
 export class ProductsEffects {
