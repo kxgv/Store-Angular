@@ -4,7 +4,6 @@ import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { ProductHomeDto } from '../../../api/api.service';
-import { create } from 'domain';
 import { actionList, callAllProductsSuccess, callAllProducts } from './products.actions';
 
 @Injectable()
