@@ -4,7 +4,7 @@ import { PRODUCTS_ROUTES } from './features/products/products.route';
 import { ProductDetailComponent } from './features/products/product-detail/product-detail.component';
 import { LoginComponent } from './features/login/login/login.component';
 import { DashboardLayoutComponent } from './features/dashboard/dashboard-layout/dashboard-layout.component';
-import { productsReducer } from './features/products/store/products.reducer';
+import { productReducer } from './features/products/store/products.reducer';
 import { ProductsEffects } from './features/products/store/products.effects';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { provideState, StoreModule } from '@ngrx/store';

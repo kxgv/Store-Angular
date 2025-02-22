@@ -7,7 +7,6 @@ import { ProductHomeDto } from '../../../../api/api.service';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { AppState, selectAll} from '../../store/products.selectors';
 import * as Actions from '../../../products/store/products.actions';
 import { ConfirmModalComponent } from '../../../../shared/components/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog'; // Importa MatDialog
@@ -39,9 +38,8 @@ export class ProductsHomeListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog,
-    private store: Store<AppState>) {
-  }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.featuredProducts$ = this.productService.products$; // Suscribirse al observable reactivo del servicio

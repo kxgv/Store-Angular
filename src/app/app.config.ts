@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideState, provideStore } from '@ngrx/store';
-import { productsReducer } from './features/products/store/products.reducer';
+import { productReducer } from './features/products/store/products.reducer';
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideEffects } from '@ngrx/effects';
@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideEffects(ProductsEffects),
     provideStore(),
-    provideState('products', productsReducer),
+    provideState('products', productReducer),
     provideStoreDevtools(), provideAnimationsAsync(), provideRouterStore()]
 };
