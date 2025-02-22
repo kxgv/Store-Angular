@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 import {
@@ -58,5 +58,11 @@ export class ProductService {
     const url = this.URLbase + "/Products/update/" + productId;
     return this.http.put<CreateProductDto>(url, product);
   }
+
+  async getAllFeaturedProducts(): Promise<ProductHomeDto[]> {
+    const url = this.URLbase + "/Products/featured";
+    return firstValueFrom(this.http.get<ProductHomeDto[]>(url));
+  }
+  
 
 }

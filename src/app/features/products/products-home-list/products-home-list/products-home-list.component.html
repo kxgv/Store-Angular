@@ -4,7 +4,7 @@
   >
     <div
       class="bg-white shadow-lg rounded-lg overflow-hidden"
-      *ngFor="let product of featuredProducts$ | async"
+      *ngFor="let product of store.products()"
     >
       <img
         src="{{ product.ImageURL }}"
@@ -43,10 +43,10 @@
       </div>
     </div>
   </div>
-  <app-confirm-modal
-    *ngIf="isModalOpen"
-    (confirm)="onConfirmDelete()"
-    (cancel)="onCancelDelete()"
-  >
-  </app-confirm-modal>
+
+
+  <!-- Indicador de carga -->
+  <div *ngIf="store.isLoading()" class="text-center mt-4 text-gray-500">
+    Cargando productos...
+  </div>
 </section>

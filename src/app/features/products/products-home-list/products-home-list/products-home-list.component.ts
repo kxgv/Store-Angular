@@ -1,5 +1,6 @@
+import { ProductState } from './../../store/products.state';
 import { AuthService } from './../../../../services/auth.service';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
@@ -11,12 +12,15 @@ import * as Actions from '../../../products/store/products.actions';
 import { ConfirmModalComponent } from '../../../../shared/components/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog'; // Importa MatDialog
 import { HttpErrorResponse } from '@angular/common/http';
+import { ProductsStore } from '../../store/products.store';
 
 @Component({
   selector: 'app-products-home-list',
-  imports: [CommonModule, RouterModule, ConfirmModalComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './products-home-list.component.html',
-  styleUrl: './products-home-list.component.css'
+  styleUrl: './products-home-list.component.css',
+  providers: [ProductsStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ProductsHomeListComponent implements OnInit {
@@ -28,6 +32,7 @@ export class ProductsHomeListComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   productService = inject(ProductService);
   authService = inject(AuthService);
+  readonly store = inject(ProductsStore);
 
   products: any[] = [];
   selectedId: number | null = 0;
@@ -42,15 +47,14 @@ export class ProductsHomeListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.featuredProducts$ = this.productService.products$; // Suscribirse al observable reactivo del servicio
+
+    this.store.loadAll();
+    //this.featuredProducts$ = this.productService.products$;
   
     this.route.paramMap.subscribe(params => {
       this.selectedId = Number(params.get('Id'));
     });
-  
-    console.log('ey im this role', this.role);
-  
-    this.productService.getFeaturedProducts(); // Cargar productos al iniciar
+    //this.productService.getFeaturedProducts(); // Carga productos al iniciar
   }
   
 
