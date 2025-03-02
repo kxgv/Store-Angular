@@ -1,11 +1,11 @@
 import { AuthService } from './../../../../services/auth.service';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Inject, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { ProductHomeDto } from '../../../../api/api.service';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState, selectAll} from '../../store/products.selectors';
 import * as Actions from '../../../products/store/products.actions';
@@ -36,21 +36,38 @@ export class ProductsHomeListComponent implements OnInit {
   role: string | null = "";
   selectedProductId: number | null = null;
   isModalOpen = false;
+  isAdmin: boolean = false;
+
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private router: Router,
     private dialog: MatDialog,
     private store: Store<AppState>) {
+
+      const localStorage = document.defaultView?.localStorage;
+      if (localStorage) {
+        const counter = localStorage.getItem('token');
+        this.isAdmin = this.authService.getIsAdmin(localStorage);
+
+        if (counter) {
+          console.log("DOCUMENT");
+          console.log(this.isAdmin);
+          console.log(counter);
+        } else {
+          console.log(counter);
+        }
+      }
   }
 
   ngOnInit(): void {
+
+    console.log(this.isAdmin);
     this.featuredProducts$ = this.productService.products$; // Suscribirse al observable reactivo del servicio
   
     this.route.paramMap.subscribe(params => {
       this.selectedId = Number(params.get('Id'));
     });
-  
-    console.log('ey im this role', this.role);
   
     this.productService.getFeaturedProducts(); // Cargar productos al iniciar
   }

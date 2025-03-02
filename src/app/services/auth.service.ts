@@ -14,23 +14,17 @@ export class AuthService {
 
   private http = inject(HttpClient);
   private URLbase = environment.apiURL;
-
-  private currentUserSubject: BehaviorSubject<string | null>;
-  public currentUser: Observable<string | null>;
+  private tokenKey = 'token'; // Clave para almacenar el token en localStorage
 
   token: TokenPayload | undefined;
   decodedToken: TokenPayload | undefined;
 
   formUrlEncoded = 'application/x-www-form-urlencoded';
   applicationJson = 'application/json;charset=utf8';
+  currentUserSubject: any;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    const storage = this.document.defaultView?.localStorage;
-
-    this.currentUserSubject = new BehaviorSubject<string | null>(
-      storage ? storage.getItem('token') : null
-    );
-    this.currentUser = this.currentUserSubject.asObservable();
+    const localStorage = document.defaultView?.localStorage;
   }
 
   login(email: string, password: string) {
@@ -41,10 +35,12 @@ export class AuthService {
     ).pipe(
       switchMap(response => {
         if (response.token) {
-          localStorage.setItem('token', response.token);
-          this.currentUserSubject.next(response.token);
-          this.storageToken(response.token);
-          this.getDecodedToken(response.token);
+          //localStorage.setItem('token', response.token);
+          // this.currentUserSubject.next(response.token);
+          this.saveToken(response.token); // Guarda el token en localStorage
+
+          // this.storageToken(response.token);
+          // this.getDecodedToken(response.token);
         }
         return of(response);
       }),
@@ -55,16 +51,56 @@ export class AuthService {
     );
   }
 
+  // Método para decodificar el token
+  decodeToken(token: string): any {
+    try {
+      const payload = token.split('.')[1]; // Obtiene el payload del token
+      const decodedPayload = atob(payload); // Decodifica el payload en base64
+      console.log(payload);
+      return JSON.parse(decodedPayload); // Convierte el payload a un objeto JSON
+    } catch (error) {
+      console.error('Error decodificando el token:', error);
+      return null;
+    }
+  }
+
+  // Método para obtener el valor de IsAdmin desde el token
+  getIsAdmin(storage: Storage | undefined): boolean {
+    if(storage == undefined) {
+      console.log("undefined storage");
+      return false;
+    } else {
+      const token = storage.getItem(this.tokenKey);
+      if (token) {
+        console.log(token);
+        const decodedToken = this.decodeToken(token);
+        return decodedToken?.IsAdmin === 'true'; // Convierte el string a booleano
+      }
+      return false;
+    }
+  }
+
+  // Método para guardar el token en localStorage
+  saveToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  // Método para obtener el token desde localStorage
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  // Método para cerrar sesión
+  // logout(): void {
+  //   localStorage.removeItem(this.tokenKey);
+  //   this.router.navigate(['/login']);
+  // }
+
   get currentUserValue(): string | null {
     return this.currentUserSubject.value;
   }
 
-  logout() {
-    this.document.defaultView?.localStorage?.removeItem('token');
-    this.currentUserSubject.next(null);
-  }
-
-  getAuthToken(): TokenPayload | undefined{
+  getAuthToken(): TokenPayload | undefined {
     return this.token;
   }
 
@@ -78,7 +114,7 @@ export class AuthService {
       console.error("No JWT token provided");
       return null;
     }
-  
+
     try {
       const decodedToken: TokenPayload = jwtDecode(authToken);
       this.decodedToken = decodedToken;
@@ -102,23 +138,19 @@ export class AuthService {
     return new HttpHeaders().set('Content-Type', contentType);
   }
 
-  getToken(): string | null {
-    return this.document.defaultView?.localStorage?.getItem('token') ?? null;
-  }
-
   public isUserInRole(expectedRole: string): Observable<boolean> {
     return of(this.getAuthToken()).pipe(
-        map(jwtToken => {
-            console.log(jwtToken?.role.toLowerCase());
-            if (jwtToken && jwtToken.role) {
+      map(jwtToken => {
+        console.log(jwtToken?.role.toLowerCase());
+        if (jwtToken && jwtToken.role) {
 
-              const _expectedRole = expectedRole.toLowerCase();
-              const _userRole = jwtToken.role.toLowerCase();
-              return _expectedRole === _userRole;    
-            } else {
-                return false;
-            }
-        }),
+          const _expectedRole = expectedRole.toLowerCase();
+          const _userRole = jwtToken.role.toLowerCase();
+          return _expectedRole === _userRole;
+        } else {
+          return false;
+        }
+      }),
     );
   }
 
