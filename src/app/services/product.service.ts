@@ -25,11 +25,8 @@ export class ProductService {
   products$ = this.productsSubject.asObservable();
 
   // Obtener productos destacados
-  getFeaturedProducts(): void {
-    this.http.get<ProductHomeDto[]>(`${this.URLbase}/Products/featured`).subscribe({
-      next: (products) => this.productsSubject.next(products),
-      error: (err) => console.error('Error al obtener productos:', err),
-    });
+  getFeaturedProducts(): Observable<ProductHomeDto[]> {
+    return this.http.get<ProductHomeDto[]>(`${this.URLbase}/Products/featured`);
   }
 
   // Obtener un producto por su ID

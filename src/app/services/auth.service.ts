@@ -56,7 +56,7 @@ export class AuthService {
     try {
       const payload = token.split('.')[1]; // Obtiene el payload del token
       const decodedPayload = atob(payload); // Decodifica el payload en base64
-      console.log(payload);
+      console.log(decodedPayload);
       return JSON.parse(decodedPayload); // Convierte el payload a un objeto JSON
     } catch (error) {
       console.error('Error decodificando el token:', error);
@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   // Método para obtener el valor de IsAdmin desde el token
-  getIsAdmin(storage: Storage | undefined): boolean {
+    getIsAdmin(storage: Storage | undefined): boolean {
     if(storage == undefined) {
       console.log("undefined storage");
       return false;
@@ -74,7 +74,7 @@ export class AuthService {
       if (token) {
         console.log(token);
         const decodedToken = this.decodeToken(token);
-        return decodedToken?.IsAdmin === 'true'; // Convierte el string a booleano
+        return decodedToken?.IsAdmin === "True"; // Convierte el string a booleano
       }
       return false;
     }

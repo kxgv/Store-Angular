@@ -5,17 +5,18 @@ import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { ProductHomeDto } from '../../../../api/api.service';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT, JsonPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState, selectAll} from '../../store/products.selectors';
 import * as Actions from '../../../products/store/products.actions';
 import { ConfirmModalComponent } from '../../../../shared/components/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog'; // Importa MatDialog
 import { HttpErrorResponse } from '@angular/common/http';
+import { ProductsStore } from '../../store/products.store';
 
 @Component({
   selector: 'app-products-home-list',
-  imports: [CommonModule, RouterModule, ConfirmModalComponent],
+  imports: [CommonModule, RouterModule, JsonPipe],
   templateUrl: './products-home-list.component.html',
   styleUrl: './products-home-list.component.css'
 })
@@ -27,6 +28,8 @@ export class ProductsHomeListComponent implements OnInit {
   featuredProducts$: Observable<ProductHomeDto[]> = of([]);
 
   private readonly route = inject(ActivatedRoute);
+  readonly store = inject(ProductsStore); 
+
   productService = inject(ProductService);
   authService = inject(AuthService);
 
@@ -42,18 +45,17 @@ export class ProductsHomeListComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
-    private dialog: MatDialog,
-    private store: Store<AppState>) {
+    private dialog: MatDialog) {
 
       const localStorage = document.defaultView?.localStorage;
       if (localStorage) {
         const counter = localStorage.getItem('token');
-        this.isAdmin = this.authService.getIsAdmin(localStorage);
 
         if (counter) {
           console.log("DOCUMENT");
-          console.log(this.isAdmin);
           console.log(counter);
+          this.isAdmin = this.authService.getIsAdmin(localStorage);
+          console.log(this.isAdmin);
         } else {
           console.log(counter);
         }
@@ -62,14 +64,15 @@ export class ProductsHomeListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.isAdmin);
     this.featuredProducts$ = this.productService.products$; // Suscribirse al observable reactivo del servicio
   
     this.route.paramMap.subscribe(params => {
       this.selectedId = Number(params.get('Id'));
     });
+
+    this.store.load(); 
   
-    this.productService.getFeaturedProducts(); // Cargar productos al iniciar
+    //this.productService.getFeaturedProducts(); // Cargar productos al iniciar
   }
   
 

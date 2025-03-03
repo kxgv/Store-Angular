@@ -1,3 +1,6 @@
+<!-- store products
+<pre><code>{{store.products() | json}}</code></pre>
+-->
 <section class="p-8">
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
@@ -16,7 +19,7 @@
         <p class="text-gray-500">{{ product.Description }}</p>
         <p class="text-lg font-bold text-orange-600">{{ product.Price }}</p>
       </div>
-      <div class="flex justify-between p-4" *ngIf="!isAdmin">
+      <div class="flex justify-between p-4">
         <a [routerLink]="['/product-detail', product.Id]">
           <button
             class="bg-amber-100 hover:bg-amber-200 text-black font-bold py-1 px-3 shadow-lg text-sm"
@@ -27,13 +30,13 @@
         <div class="flex gap-2">
           <!-- *ngIf="role === 'Admin'" -->
           <a [routerLink]="['/product-edit', product.Id]">
-            <button
+            <button *ngIf="isAdmin"
               class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
             >
               Editar
             </button>
           </a>
-          <button
+          <button *ngIf="isAdmin"
             (click)="openModal(product.Id)"
             class="bg-red-400 hover:bg-red-600 text-white font-bold py-1 px-3 shadow-lg text-sm"
           >
