@@ -4,21 +4,17 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { ProductHomeDto } from '../../../../api/api.service';
-import { map, Observable, of, switchMap } from 'rxjs';
-import { CommonModule, DOCUMENT, JsonPipe } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AppState, selectAll} from '../../store/products.selectors';
-import * as Actions from '../../../products/store/products.actions';
-import { ConfirmModalComponent } from '../../../../shared/components/confirm-modal/confirm-modal.component';
-import { MatDialog } from '@angular/material/dialog'; // Importa MatDialog
+import { Observable, of } from 'rxjs';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog'; 
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductsStore } from '../../store/products.store';
 
 @Component({
   selector: 'app-products-home-list',
-  imports: [CommonModule, RouterModule, JsonPipe],
+  imports: [CommonModule, RouterModule],
   templateUrl: './products-home-list.component.html',
-  styleUrl: './products-home-list.component.css'
+  styleUrl: './products-home-list.component.css',
 })
 
 export class ProductsHomeListComponent implements OnInit {
@@ -41,7 +37,6 @@ export class ProductsHomeListComponent implements OnInit {
   isModalOpen = false;
   isAdmin: boolean = false;
 
-
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
@@ -52,8 +47,6 @@ export class ProductsHomeListComponent implements OnInit {
         const counter = localStorage.getItem('token');
 
         if (counter) {
-          console.log("DOCUMENT");
-          console.log(counter);
           this.isAdmin = this.authService.getIsAdmin(localStorage);
           console.log(this.isAdmin);
         } else {
@@ -64,18 +57,18 @@ export class ProductsHomeListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.featuredProducts$ = this.productService.products$; // Suscribirse al observable reactivo del servicio
-  
     this.route.paramMap.subscribe(params => {
       this.selectedId = Number(params.get('Id'));
     });
 
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
     this.store.load(); 
-  
-    //this.productService.getFeaturedProducts(); // Cargar productos al iniciar
+    console.log("productState", this.store.state());
   }
   
-
   openProductDetail(productId: number): void {
     this.router.navigate(['/product-detail', productId], { relativeTo: this.route })
   }

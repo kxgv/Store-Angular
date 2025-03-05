@@ -7,7 +7,7 @@
   >
     <div
       class="bg-white shadow-lg rounded-lg overflow-hidden"
-      *ngFor="let product of featuredProducts$ | async"
+      *ngFor="let product of store.allProducts();"
     >
       <img
         src="{{ product.ImageURL }}"

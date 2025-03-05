@@ -72,7 +72,6 @@ export class AuthService {
     } else {
       const token = storage.getItem(this.tokenKey);
       if (token) {
-        console.log(token);
         const decodedToken = this.decodeToken(token);
         return decodedToken?.IsAdmin === "True"; // Convierte el string a booleano
       }
